@@ -98,7 +98,10 @@
         <br><br>
         <strong>Will you be my Valentine? 🌹❤️</strong>
       </p>
-
+<div class="button">
+  <button onclick="answerYes()">Yes❤️</button>
+  <button onclick="answerYes()">Of course</button>
+</div>
       <div class="signature">
         Always yours,<br>
         Mr LN Mashau
@@ -107,9 +110,31 @@
   </div>
 
   <script>
+    
+  
+  
     function showLove() {
       document.getElementById("hiddenMessage").style.display = "block";
+      document.querySelector(".buttons").style.display = "flex";
+      document.getElementById("music").style.display = "block";
     }
+
+    function answerYes() {
+      alert("You just made my heart the happiest ❤️");
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    setInterval(createHeart, 500);
   </script>
 
 </body>
