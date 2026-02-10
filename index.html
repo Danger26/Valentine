@@ -1,141 +1,236 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Valentine ❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Girl ❤️</title>
+    <style>
+        /* --- General Styling --- */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #d63384;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff6a88, #ff99ac);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: white;
-      text-align: center;
-    }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+            position: relative;
+            max-width: 500px;
+            width: 80%;
+            transition: all 0.5s ease-in-out;
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.18);
-      padding: 28px;
-      border-radius: 22px;
-      max-width: 380px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-    }
+        /* Hide pages by default */
+        .page {
+            display: none;
+            animation: fadeIn 0.8s;
+        }
 
-    h1 {
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
+        /* Only show the active page */
+        .active {
+            display: block;
+        }
 
-    p {
-      font-size: 15.5px;
-      line-height: 1.7;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
 
-    button {
-      margin-top: 22px;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 30px;
-      background: white;
-      color: #ff4f7a;
-      font-size: 15px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+        p {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
 
-    button:hover {
-      background: #ffe1ea;
-    }
+        /* --- Button Styling --- */
+        .btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            margin: 10px;
+        }
 
-    #hiddenMessage {
-      display: none;
-      margin-top: 22px;
-      font-size: 15px;
-    }
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #ff6b81;
+        }
 
-    .signature {
-      margin-top: 18px;
-      font-style: italic;
-      font-size: 14px;
-      opacity: 0.9;
-    }
-  </style>
+        .btn-secondary {
+            background-color: #a4b0be;
+            box-shadow: none;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Roses */
+        .rose {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2.5rem;
+            /* Turn Red Rose Pink */
+            filter: hue-rotate(320deg) brightness(1.2); 
+            animation: floatUp linear forwards;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Fireworks */
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: explode 1.5s ease-out forwards;
+            z-index: 6;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        /* Final Message Styling */
+        .final-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d63384;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+        }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>To My Love ❤️</h1>
+    <div class="container">
+        
+        <div id="page1" class="page active">
+            <h1>Hey Beautiful! ❤️</h1>
+            <p>I made something special just for you.</p>
+            <button class="btn" onclick="nextPage(2)">Open It 💌</button>
+        </div>
 
-    <p>
-      From <strong>Your Love, Mr LN Mashau</strong><br>
-      To <strong>My Love, Miss AP Mashoene</strong>
-    </p>
+        <div id="page2" class="page">
+            <h1>Just thinking...</h1>
+            <p>Valentine's Day is coming up, and I realized there is no one else in the world I'd rather annoy... I mean, spend time with. 😉</p>
+            <button class="btn" onclick="nextPage(3)">Continue &rarr;</button>
+        </div>
 
-    <p>
-      Since we are far away from each other,<br>
-      I can’t ask you this face to face the way I truly want to.<br>
-      So I decided to ask you in the best way I can… from my heart.
-    </p>
+        <div id="page3" class="page">
+            <h1>So, I have a question...</h1>
+            <p>Will you make me the happiest person and be my Valentine?</p>
+            <button class="btn" onclick="celebrate()">YES! I Agree! 🌹</button>
+            <br>
+            <button class="btn btn-secondary" style="font-size: 0.8rem; padding: 10px 20px; opacity: 0.7;" onclick="alert('Oops! This button is broken! try the red one 😉')">No</button>
+        </div>
 
-    <button onclick="showLove()">Tap to read more 💕</button>
+        <div id="page4" class="page">
+            <h1 class="final-text">YAY! 💖<br>Can't Wait!</h1>
+            <p>Get ready for the best Valentine's ever.</p>
+        </div>
 
-    <div id="hiddenMessage">
-      <p>
-        Distance has never changed how I feel about you.<br>
-        Even when we are not together physically,<br>
-        you are always close to my heart and my thoughts.
-        <br><br>
-        I chose this way because I wanted you to know<br>
-        that I think about you, I value you,<br>
-        and I care deeply about us.
-        <br><br>
-        So today, with all my love and sincerity…
-        <br><br>
-        <strong>Will you be my Valentine? 🌹❤️</strong>
-      </p>
-<div class="button">
-  <button onclick="answerYes()">Yes❤️</button>
-  <button onclick="answerYes()">Of course</button>
-</div>
-      <div class="signature">
-        Always yours,<br>
-        Mr LN Mashau
-      </div>
     </div>
-  </div>
 
-  <script>
-    
-  
-  
-    function showLove() {
-      document.getElementById("hiddenMessage").style.display = "block";
-      document.querySelector(".buttons").style.display = "flex";
-      document.getElementById("music").style.display = "block";
-    }
+    <script>
+        // Function to switch between pages
+        function nextPage(pageNumber) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
 
-    function answerYes() {
-      alert("You just made my heart the happiest ❤️");
-    }
+            // Show the specific page
+            const activePage = document.getElementById('page' + pageNumber);
+            activePage.classList.add('active');
+        }
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-      document.body.appendChild(heart);
+        // Function for the 'Yes' button
+        function celebrate() {
+            // Hide the active page (which is page 3) before showing the finale
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show Page 4
+            document.getElementById('page4').classList.add('active');
 
-      setTimeout(() => heart.remove(), 7000);
-    }
+            startRoses();
+            startFireworks();
+        }
 
-    setInterval(createHeart, 500);
-  </script>
+        // --- Animation Logic Below ---
+
+        function startRoses() {
+            setInterval(() => {
+                const rose = document.createElement('div');
+                rose.classList.add('rose');
+                rose.innerText = '🌹'; 
+                rose.style.left = Math.random() * 100 + 'vw';
+                rose.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+                rose.style.fontSize = Math.random() * 20 + 20 + 'px'; 
+                document.body.appendChild(rose);
+                
+                setTimeout(() => rose.remove(), 8000);
+            }, 300);
+        }
+
+        function startFireworks() {
+            setInterval(() => {
+                createFirework(
+                    Math.random() * window.innerWidth, 
+                    Math.random() * window.innerHeight
+                );
+            }, 600);
+        }
+
+        function createFirework(x, y) {
+            const colors = ['#ff4757', '#ff6b81', '#ffda79', '#badc58', '#7efff5'];
+            for (let i = 0; i < 40; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 120 + 60; 
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+                
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 1500);
+            }
+        }
+    </script>
 
 </body>
 </html>
